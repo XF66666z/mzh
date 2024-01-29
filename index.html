@@ -1,29 +1,25 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>基站信息</title>
-</head>
-<body>
-  <h1>获取基站信息</h1>
-
-  <p>点击按钮获取基站信息</p>
-
-  <button onclick="getLocation()">获取基站信息</button>
-
-  <p id="demo"></p>
-
   <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        document.getElementById("demo").innerHTML = "Geolocation is not supported by this browser.";
-      }
-    }
-
-    function showPosition(position) {
-      document.getElementById("demo").innerHTML = "您的经度：" + position.coords.latitude +
-      "， 您的纬度：" + position.coords.longitude;
+    function getBaseStationInfo() {
+      // 使用AJAX技术获取基站信息
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          var baseStationInfo = JSON.parse(xhr.responseText);
+          document.getElementById("base-station-info").innerHTML = "基站名称：" + baseStationInfo.name + "<br>地址：" + baseStationInfo.address + "<br>信号强度：" + baseStationInfo.signalStrength;
+        }
+      };
+      xhr.open("GET", "http://example.com/getBaseStationInfo", true);
+      xhr.send();
     }
   </script>
+</head>
+<body>
+  <h1>基站信息</h1>
+  <button onclick="getBaseStationInfo()">获取基站信息</button>
+  <div id="base-station-info"></div>
 </body>
 </html>
