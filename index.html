@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>基站信息</title>
+</head>
+<body>
+  <h1>获取基站信息</h1>
+
+  <p>点击按钮获取基站信息</p>
+
+  <button onclick="getLocation()">获取基站信息</button>
+
+  <p id="demo"></p>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        document.getElementById("demo").innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      document.getElementById("demo").innerHTML = "您的经度：" + position.coords.latitude +
+      "， 您的纬度：" + position.coords.longitude;
+    }
+  </script>
+</body>
+</html>
